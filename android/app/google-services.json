@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "672790222822",
+    "project_id": "travilo-64aa0",
+    "storage_bucket": "travilo-64aa0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672790222822:android:d0e642664f4f666548e827",
+        "android_client_info": {
+          "package_name": "com.example.travilo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672790222822-ljtjvki1c9dvroj108fh10hnsrf994p7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMNEfny1OedrWo-USC9mSCU9mpZJEgDUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672790222822-ljtjvki1c9dvroj108fh10hnsrf994p7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
