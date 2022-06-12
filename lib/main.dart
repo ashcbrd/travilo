@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travilo/provider/google_sign_in.dart';
+import 'package:travilo/screens/favorites/favorite_screen.dart';
 import 'package:travilo/screens/home/home_screen.dart';
 import 'package:travilo/screens/welcome/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.green,
         ),
-        home: const HomeScreen(),  
+        home: WelcomeScreen(),  
       ),
     );
   }

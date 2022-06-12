@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travilo/model/place_model.dart';
+import 'package:travilo/screens/calendar.dart';
+import 'package:travilo/screens/category/hotel/hotel_screen.dart';
 import 'package:travilo/screens/detailscreen/detail_screen.dart';
 import 'package:travilo/screens/home/widgets/places_card.dart';
+import 'package:travilo/screens/map_screen.dart';
 import 'package:travilo/utilities/colors.dart';
+import '../favorites/favorite_screen.dart';
 import 'widgets/category_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final GoogleSignInAccount user;
+
+  const HomeScreen({Key? key, required this.user, LatLng? initialCameraPosition}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,24 +31,59 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Icon(Icons.home_rounded, 
-              size: 50,
-              color: primaryColor,
+            children: [
+              const Icon(
+                Icons.home_rounded,
+                size: 50,
+                color: primaryColor,
               ),
-              Icon(Icons.map_rounded,
-              size: 50,
-              color: primaryColor,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MapScreen()
+                    )
+                  );
+
+                },
+                child: const Icon(
+                  Icons.map_rounded,
+                  size: 50,
+                  color: primaryColor,
+                ),
               ),
-              Icon(Icons.favorite, 
-              size: 50,
-              color: primaryColor,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FavoriteScreen()
+                    )
+                  );
+                },
+                child: const Icon(
+                  Icons.favorite,
+                  size: 50,
+                  color: primaryColor,
+                ),
               ),
-              Icon(Icons.calendar_month_rounded, 
-              size: 50,
-              color: primaryColor,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Calendar()
+                    )
+                  );
+
+                },
+                child: const Icon(
+                  Icons.calendar_month_rounded,
+                  size: 50,
+                  color: primaryColor,
+                ),
               ),
-              
             ],
           ),
         ),
@@ -55,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage(""),
+                    backgroundImage: AssetImage("assets/images/profile.jpeg"),
                   ),
                   const SizedBox(
                     width: 15,
@@ -69,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           children: [
                         TextSpan(
-                            text: "Asther",
+                            text: "Asther Louie Cabardo",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -77,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ]))
                 ],
               ),
-        
+
               // search section
               const SizedBox(
                 height: 15,
@@ -113,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-        
+
               // category
               const SizedBox(
                 height: 15,
@@ -138,7 +182,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         CategoryCard(
-                            press: () {},
+                            press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HotelScreen()
+                    )
+                  );
+
+                            },
                             image: "assets/images/hotel.png",
                             title: "Hotel"),
                         CategoryCard(
@@ -208,4 +260,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

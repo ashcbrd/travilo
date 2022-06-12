@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travilo/provider/google_sign_in.dart';
+import 'package:travilo/provider/google_signin_api.dart';
+import 'package:travilo/screens/home/home_screen.dart';
 import 'package:travilo/utilities/colors.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -11,6 +13,18 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  Future signIn() async {
+    final user = await GoogleSignInApi.login();
+
+    if (user == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Sign In Faild')));
+    } else {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen(user: user)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Spacer(),
+                    Image(image: AssetImage("assets/images/appicon.png"), height: 300,),
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Image.asset("assets/images/travilo.png",
@@ -45,23 +60,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 30),
-    
+
                     // login buttons
-                      ElevatedButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                            context,
-                            listen: false);
-                            provider.googleLogin();
-                        },
-                          style: ElevatedButton.styleFrom(
-                            primary: whiteColor,
-                            onPrimary: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100)
-                            )
-                          ) ,
-                          child: Container(
+                    ElevatedButton(
+                      onPressed: () {
+                        signIn();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          primary: whiteColor,
+                          onPrimary: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100))),
+                      child: Container(
                           height: 55,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -85,26 +95,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               )
                             ],
                           )),
-                    
-                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                                          ElevatedButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
+                    ElevatedButton(
+                      onPressed: () {
+                        final provider = Provider.of<GoogleSignInProvider>(
                             context,
                             listen: false);
-                            provider.googleLogin();
-                        },
-                          style: ElevatedButton.styleFrom(
-                            primary: whiteColor,
-                            onPrimary: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100)
-                            )
-                          ) ,
-                          child: Container(
+                        provider.googleLogin();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          primary: whiteColor,
+                          onPrimary: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100))),
+                      child: Container(
                           height: 55,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -128,9 +135,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               )
                             ],
                           )),
-                    
-                      ),
-                    
+                    ),
+
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.06,
                     ),

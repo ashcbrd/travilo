@@ -19,7 +19,7 @@ class PlacesCard extends StatelessWidget {
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          height: 300,
+          height: 250,
           width: 200,
           decoration: BoxDecoration(
             color: whiteColor,
@@ -41,6 +41,8 @@ class PlacesCard extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 placeInfo.name,
                 style: const TextStyle(
                   fontSize: 18,
@@ -57,6 +59,8 @@ class PlacesCard extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     placeInfo.location,
                     style: const TextStyle(
                       color: Colors.grey,

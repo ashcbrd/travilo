@@ -38,6 +38,11 @@ dependencies:
   provider: ^6.0.3
   firebase_storage: ^10.2.17
   cloud_firestore: ^3.1.17
+  google_maps_flutter: ^2.1.7
+  geolocator: ^8.2.1
+  syncfusion_flutter_calendar: ^20.1.59
+  dio: ^4.0.6
+  flutter_polyline_points: ^1.0.0
 
 dev_dependencies:
   flutter_test:
